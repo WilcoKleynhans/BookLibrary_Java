@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: libraryv2-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: libraryv2-app
+  template:
+    metadata:
+      labels:
+        app: libraryv2-app
+    spec:
+      containers:
+      - name: libraryv2-app
+        image: libraryv2:v1.0
+        ports:
+        - containerPort: 8080
+        env:
+        - name: SPRING_DATASOURCE_URL
+          value: jdbc:postgresql://postgres:5432/library
+        - name: SPRING_DATASOURCE_USERNAME
+          value: admin
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: admin
